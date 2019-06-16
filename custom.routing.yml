@@ -1,0 +1,7 @@
+custom.test:
+  path: '/test-url'
+  defaults:
+    _controller: '\Drupal\custom\Controller\TestController::list'
+    _title: 'D8 routing test page'
+  requirements:
+    _permission: 'access content'

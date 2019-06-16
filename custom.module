@@ -1,0 +1,23 @@
+<?php
+use Drupal\paragraphs\Entity\Paragraph;
+
+function custom_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+	//print_r($form_id); die();
+	if($form_id == 'node_article_form'){
+     $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+     $profile_id = $user->field_your_profile->target_id;
+     if($profile_id){
+
+
+     $paragraph = Paragraph::load($profile_id);
+     $foo = $paragraph->field_surname->value;
+     $foo1 = $paragraph->field_age->value;
+
+     //kint($foo1); die();
+
+     $form['field_profile']['widget'][0]['subform']['field_age']['widget'][0]['value']['#default_value'] = $foo1;
+     $form['field_profile']['widget'][0]['subform']['field_surname']['widget'][0]['value']['#default_value'] = $foo;
+ }
+     //kint($form['field_profile']['widget'][0]['subform']['field_age']['widget'][0]['value']['#default_value']); die();
+	}
+}
